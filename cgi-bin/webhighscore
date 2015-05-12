@@ -1,0 +1,45 @@
+#!/bin/bash
+echo "Content-type: text/html"
+echo
+cat -<<'EOF'
+
+  <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+  <html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  <meta http-equiv="Content-Type' content='text/html; charset=iso-8859-1" />
+  <title>The hall of fame tacRACER</title>
+  <style type="text/css">
+  <!--
+  body {
+   background-color: #804000;
+ }
+ .Stil1 {color: #FFFFFF}
+ .Stil2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #FFFFFF;
+ }
+ --> 
+ </style></head>
+ <body>
+ <table width='1900' height='85' border='0' bgcolor='#404040'>
+ <tr>
+ <td><h1 align="center" class='Stil2'>tacRACER  Highscore Rangliste</h1></td>
+ </tr>
+
+<strong><span class='Stil1'></span></strong>
+<table align="center" width='200' height='100' border='0'>
+        <tr><td><img src="http://upload.wikimedia.org/wikipedia/commons/a/a7/Hall_of_Fame_logo.png" width="1300" height="300" alt="tacRACER"></td></tr>
+</table>
+<table align="center" width='200' height='100' border='0'>        
+<tr><td class="Stil2">
+EOF
+cat score | sort -nr | head -10 | cat -n | sed "s/-/\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;\&nbsp;/" | sed "s/[0-9][0-9]*/&./" | sed "s/$/<br><br>/" | sed "s/ [0-9]\./\&nbsp;&/" | sed "s/\./&\&nbsp;\&nbsp;/"
+cat -<<'EOF'
+</td></tr>
+</table>
+</body>
+</html>
+
+
+EOF
